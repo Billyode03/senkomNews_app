@@ -1,1 +1,3 @@
-# senkomNews_app
+# senkom_news_app
+
+A new Flutter project.
