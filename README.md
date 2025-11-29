@@ -1,0 +1,1 @@
+# senkomNews_app
