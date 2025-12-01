@@ -12,6 +12,7 @@ dependencies:
   webview_flutter: ^2.0.9
   another_flutter_splash_screen: ^1.2.1
   google_fonts: ^5.1.0
+  flutter_slider_drawer: ^3.0.2
 
 
 dev_dependencies:

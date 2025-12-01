@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:senkom_news_app/app/constant/color_constant.dart';
 import 'package:senkom_news_app/app/constant/text_constant.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -10,6 +13,7 @@ class WebSwipeView extends StatefulWidget {
 }
 
 class _WebSwipeViewState extends State<WebSwipeView> {
+  final _slideDrawerKey = GlobalKey<SliderDrawerState>();
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -35,45 +39,14 @@ class _WebSwipeViewState extends State<WebSwipeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          // IconButton(onPressed: (){}, icon: Icon(Icons.))
-        ],
         elevation: 0,
         backgroundColor: ColorConstant.goldYellow,
-        title:
-            // Text(
-            //   getWebPageTitle(
-            //     urls[_currentPage],
-            //   ),
-            // ),
-            Center(
+        title: Center(
           child: Text(
             "S E N K O M   N E W S",
             style: TextStyleUsable.titleBig,
           ),
         ),
-        // actions: [
-        //   IconButton(
-        //     icon: Icon(Icons.refresh),
-        //     onPressed: () async {
-        //       final ctrl = controllers[_currentPage];
-        //       if (ctrl != null) {
-        //         try {
-        //           await ctrl.reload();
-        //         } catch (e) {
-        //           // fallback kalau reload gagal
-        //           await ctrl.loadUrl(urls[_currentPage]);
-        //         }
-        //       } else {
-        //         // controller belum terinisialisasi (misal: halaman belum dibuat)
-        //         ScaffoldMessenger.of(context).showSnackBar(
-        //           SnackBar(
-        //               content: Text('WebView belum siap, coba sebentar lagi')),
-        //         );
-        //       }
-        //     },
-        //   )
-        // ],
       ),
       body: PageView.builder(
         controller: _pageController,
@@ -85,6 +58,11 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           return WebView(
             javascriptMode: JavascriptMode.unrestricted,
             initialUrl: urls[index],
+            gestureRecognizers: {
+              Factory<VerticalDragGestureRecognizer>(
+                () => VerticalDragGestureRecognizer(),
+              ),
+            },
             onWebViewCreated: (controller) {
               // simpan controller yang diberikan oleh plugin
               controllers[index] = controller;
