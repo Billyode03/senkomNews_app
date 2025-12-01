@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senkom_news_app/app/constant/color_constant.dart';
+import 'package:senkom_news_app/app/constant/text_constant.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // import 'package:my_app/constant/color_constant.dart';
 
@@ -34,30 +35,45 @@ class _WebSwipeViewState extends State<WebSwipeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorConstant.goldYellow,
-        title: Text(getWebPageTitle(urls[_currentPage])),
         actions: [
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () async {
-              final ctrl = controllers[_currentPage];
-              if (ctrl != null) {
-                try {
-                  await ctrl.reload();
-                } catch (e) {
-                  // fallback kalau reload gagal
-                  await ctrl.loadUrl(urls[_currentPage]);
-                }
-              } else {
-                // controller belum terinisialisasi (misal: halaman belum dibuat)
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                      content: Text('WebView belum siap, coba sebentar lagi')),
-                );
-              }
-            },
-          )
+          // IconButton(onPressed: (){}, icon: Icon(Icons.))
         ],
+        elevation: 0,
+        backgroundColor: ColorConstant.goldYellow,
+        title:
+            // Text(
+            //   getWebPageTitle(
+            //     urls[_currentPage],
+            //   ),
+            // ),
+            Center(
+          child: Text(
+            "S E N K O M   N E W S",
+            style: TextStyleUsable.titleBig,
+          ),
+        ),
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.refresh),
+        //     onPressed: () async {
+        //       final ctrl = controllers[_currentPage];
+        //       if (ctrl != null) {
+        //         try {
+        //           await ctrl.reload();
+        //         } catch (e) {
+        //           // fallback kalau reload gagal
+        //           await ctrl.loadUrl(urls[_currentPage]);
+        //         }
+        //       } else {
+        //         // controller belum terinisialisasi (misal: halaman belum dibuat)
+        //         ScaffoldMessenger.of(context).showSnackBar(
+        //           SnackBar(
+        //               content: Text('WebView belum siap, coba sebentar lagi')),
+        //         );
+        //       }
+        //     },
+        //   )
+        // ],
       ),
       body: PageView.builder(
         controller: _pageController,
@@ -83,6 +99,7 @@ class _WebSwipeViewState extends State<WebSwipeView> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: ColorConstant.goldYellow,
         currentIndex: _currentPage,
         onTap: (index) {
           _pageController.animateToPage(
