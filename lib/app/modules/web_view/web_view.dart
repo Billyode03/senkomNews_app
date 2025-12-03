@@ -43,7 +43,7 @@ class _WebSwipeViewState extends State<WebSwipeView> {
         backgroundColor: ColorConstant.goldYellow,
         title: Center(
           child: Text(
-            "S E N K O M   N E W S",
+            "S E N K O M   N E W ",
             style: TextStyleUsable.titleBig,
           ),
         ),

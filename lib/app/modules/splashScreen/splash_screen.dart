@@ -25,7 +25,7 @@ class SplashScreen extends StatelessWidget {
           width: 120,
         ),
       ),
-      duration: Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 3000),
       onAnimationEnd: () => debugPrint("On Fade In End"),
       nextScreen: WebSwipeView(),
     );
