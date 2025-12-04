@@ -39,7 +39,7 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           animationDuration: Duration.microsecondsPerMillisecond,
           key: _drawerKey,
           slideDirection: SlideDirection.topToBottom, // 👈 Versi baru
-          sliderOpenSize: 230,
+          sliderOpenSize: 190,
 
           appBar: SliderAppBar(
             config: SliderAppBarConfig(
@@ -144,15 +144,15 @@ class _WebSwipeViewState extends State<WebSwipeView> {
             childAspectRatio: 2.8,
             mainAxisSpacing: 6,
             children: [
-              _menuItem(Icons.home, "Home", () {
+              _menuItem(Icons.home, "Beranda", () {
                 _drawerKey.currentState?.closeSlider();
                 _pageController.jumpToPage(0);
               }),
-              _menuItem(Icons.favorite, "Likes", () {}),
-              _menuItem(Icons.add_circle, "Post", () {}),
+              _menuItem(Icons.favorite, "Favorite", () {}),
+              // _menuItem(Icons.add_circle, "Post", () {}),
               _menuItem(Icons.settings, "Setting", () {}),
-              _menuItem(Icons.notifications, "Notification", () {}),
-              _menuItem(Icons.logout, "Logout", () {}),
+              // _menuItem(Icons.notifications, "Notification", () {}),
+              // _menuItem(Icons.logout, "Logout", () {}),
             ],
           ),
         ],
