@@ -24,11 +24,15 @@ class _WebSwipeViewState extends State<WebSwipeView> {
   ];
 
   late List<WebViewController?> controllers;
+  late List<bool> _errorState;
+  late List<bool> _loadingState;
 
   @override
   void initState() {
     super.initState();
     controllers = List<WebViewController?>.filled(urls.length, null);
+    _errorState = List<bool>.filled(urls.length, false);
+    _loadingState = List<bool>.filled(urls.length, true);
   }
 
   @override
@@ -48,7 +52,7 @@ class _WebSwipeViewState extends State<WebSwipeView> {
               drawerIconColor: Colors.white,
               title: Center(
                 child: Text(
-                  "S E N K O M   N E W S",
+                  "S E N K O M   N E W S ",
                   style: TextStyleUsable.titleBig,
                 ),
               ),
@@ -57,26 +61,39 @@ class _WebSwipeViewState extends State<WebSwipeView> {
 
           slider: _buildDrawerMenu(),
           child: PageView.builder(
-            controller: _pageController,
-            itemCount: urls.length,
-            onPageChanged: (index) {
-              setState(() => _currentPage = index);
-            },
-            itemBuilder: (context, index) {
-              return WebView(
-                javascriptMode: JavascriptMode.unrestricted,
-                initialUrl: urls[index],
-                gestureRecognizers: {
-                  Factory<VerticalDragGestureRecognizer>(
-                    () => VerticalDragGestureRecognizer(),
-                  ),
-                },
-                onWebViewCreated: (controller) {
-                  controllers[index] = controller;
-                },
-              );
-            },
-          ),
+              controller: _pageController,
+              itemCount: urls.length,
+              onPageChanged: (index) {
+                setState(() => _currentPage = index);
+              },
+              itemBuilder: (context, index) {
+                if (_errorState[index]) {
+                  return _buildNoInternetView(index);
+                }
+
+                return Stack(
+                  children: [
+                    WebView(
+                      javascriptMode: JavascriptMode.unrestricted,
+                      initialUrl: urls[index],
+                      onWebViewCreated: (controller) {
+                        controllers[index] = controller;
+                      },
+                      onPageFinished: (_) {
+                        setState(() => _loadingState[index] = false);
+                      },
+                      onWebResourceError: (_) {
+                        setState(() {
+                          _errorState[index] = true;
+                          _loadingState[index] = false;
+                        });
+                      },
+                    ),
+                    if (_loadingState[index])
+                      const Center(child: CircularProgressIndicator()),
+                  ],
+                );
+              }),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -94,6 +111,40 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           BottomNavigationBarItem(icon: Icon(Icons.web), label: "Website"),
           BottomNavigationBarItem(
               icon: Icon(Icons.video_library), label: "YouTube"),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNoInternetView(int index) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            ImageConstant.noConnect, // ganti sesuai file lo
+            width: 250,
+          ),
+          const SizedBox(height: 20),
+          const Text(
+            "Tidak ada koneksi internet",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(
+              ColorConstant.goldYellow, 
+            )),
+            onPressed: () async {
+              setState(() {
+                _loadingState[index] = true;
+                _errorState[index] = false;
+              });
+              controllers[index]?.reload();
+            },
+            child: const Text("Coba Lagi"),
+          )
         ],
       ),
     );
@@ -149,10 +200,8 @@ class _WebSwipeViewState extends State<WebSwipeView> {
                 _pageController.jumpToPage(0);
               }),
               _menuItem(Icons.favorite, "Favorite", () {}),
-              // _menuItem(Icons.add_circle, "Post", () {}),
+              _menuItem(Icons.favorite, "Favorite", () {}),
               _menuItem(Icons.settings, "Setting", () {}),
-              // _menuItem(Icons.notifications, "Notification", () {}),
-              // _menuItem(Icons.logout, "Logout", () {}),
             ],
           ),
         ],
