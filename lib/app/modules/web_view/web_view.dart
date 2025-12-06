@@ -43,7 +43,7 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           animationDuration: Duration.microsecondsPerMillisecond,
           key: _drawerKey,
           slideDirection: SlideDirection.topToBottom, // 👈 Versi baru
-          sliderOpenSize: 190,
+          sliderOpenSize: 220,
 
           appBar: SliderAppBar(
             config: SliderAppBarConfig(
@@ -123,7 +123,7 @@ class _WebSwipeViewState extends State<WebSwipeView> {
         children: [
           Image.asset(
             ImageConstant.noConnect, // ganti sesuai file lo
-            width: 250,
+            width: 200,
           ),
           const SizedBox(height: 20),
           const Text(
@@ -134,7 +134,7 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           ElevatedButton(
             style: ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(
-              ColorConstant.goldYellow, 
+              ColorConstant.goldYellow,
             )),
             onPressed: () async {
               setState(() {
@@ -171,15 +171,10 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           Center(
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 35,
-                  backgroundImage: AssetImage(ImageConstant.logoAwal),
-                  // backgroundImage: Image.asset(ImageConstant.logoAwal),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  "Menu",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
+                Image.asset(
+                  ImageConstant.logoAwal,
+                  height: 55,
+                  width: 55,
                 ),
               ],
             ),
@@ -191,17 +186,17 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           GridView.count(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 3,
+            crossAxisCount: 2,
             childAspectRatio: 2.8,
-            mainAxisSpacing: 6,
+            mainAxisSpacing: 4,
             children: [
               _menuItem(Icons.home, "Beranda", () {
                 _drawerKey.currentState?.closeSlider();
                 _pageController.jumpToPage(0);
               }),
               _menuItem(Icons.favorite, "Favorite", () {}),
-              _menuItem(Icons.favorite, "Favorite", () {}),
-              _menuItem(Icons.settings, "Setting", () {}),
+              _menuItem(Icons.settings, "Prov - Kota", () {}),
+              _menuItem(Icons.settings, "Rating", () {}),
             ],
           ),
         ],
@@ -212,12 +207,21 @@ class _WebSwipeViewState extends State<WebSwipeView> {
   Widget _menuItem(IconData icon, String label, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.white, size: 20),
-          const SizedBox(width: 10),
-          Text(label, style: const TextStyle(color: Colors.white)),
-        ],
+      child: Container(
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.white, size: 20),
+            const SizedBox(width: 10),
+            Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
