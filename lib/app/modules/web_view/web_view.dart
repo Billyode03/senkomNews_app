@@ -5,6 +5,9 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:senkom_news_app/app/constant/color_constant.dart';
 import 'package:senkom_news_app/app/constant/image_constant.dart';
 import 'package:senkom_news_app/app/constant/text_constant.dart';
+import 'package:senkom_news_app/app/modules/favorite/favorite_screen.dart';
+import 'package:senkom_news_app/app/modules/prov_kota/prov_kota_screen.dart';
+import 'package:senkom_news_app/app/modules/rating/rating_screen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebSwipeView extends StatefulWidget {
@@ -194,9 +197,30 @@ class _WebSwipeViewState extends State<WebSwipeView> {
                 _drawerKey.currentState?.closeSlider();
                 _pageController.jumpToPage(0);
               }),
-              _menuItem(Icons.favorite, "Favorite", () {}),
-              _menuItem(Icons.settings, "Prov - Kota", () {}),
-              _menuItem(Icons.settings, "Rating", () {}),
+              _menuItem(Icons.favorite, "Favorite", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FavoriteScreen(),
+                  ),
+                );
+              }),
+              _menuItem(Icons.home_work_rounded, "Prov - Kota", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProvKotaScreen(),
+                  ),
+                );
+              }),
+              _menuItem(Icons.star, "Rating", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RatingScreen(),
+                  ),
+                );
+              }),
             ],
           ),
         ],
