@@ -8,6 +8,7 @@ import 'package:senkom_news_app/app/constant/text_constant.dart';
 import 'package:senkom_news_app/app/modules/favorite/favorite_screen.dart';
 import 'package:senkom_news_app/app/modules/prov_kota/prov_kota_screen.dart';
 import 'package:senkom_news_app/app/modules/rating/rating_screen.dart';
+import 'package:senkom_news_app/app/modules/tentang_kami/tentang_kami.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebSwipeView extends StatefulWidget {
@@ -46,7 +47,7 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           animationDuration: Duration.microsecondsPerMillisecond,
           key: _drawerKey,
           slideDirection: SlideDirection.topToBottom, // 👈 Versi baru
-          sliderOpenSize: 220,
+          sliderOpenSize: 290,
 
           appBar: SliderAppBar(
             config: SliderAppBarConfig(
@@ -111,9 +112,14 @@ class _WebSwipeViewState extends State<WebSwipeView> {
           );
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.web), label: "Website"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.video_library), label: "YouTube"),
+            icon: Icon(Icons.web),
+            label: "Website",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.video_library),
+            label: "YouTube",
+          ),
         ],
       ),
     );
@@ -218,6 +224,14 @@ class _WebSwipeViewState extends State<WebSwipeView> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => RatingScreen(),
+                  ),
+                );
+              }),
+              _menuItem(Icons.star, "Tentang Kami", () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TentangKamiScreen(),
                   ),
                 );
               }),

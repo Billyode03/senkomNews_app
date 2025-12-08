@@ -28,4 +28,16 @@ class TextStyleUsable {
       ),
     ],
   );
+
+  static TextStyle title_two = GoogleFonts.poppins(
+    fontSize: 10,
+    color: ColorConstant.black,
+    letterSpacing: 3,
+    fontWeight: FontWeight.bold,
+    shadows: [
+      Shadow(
+        offset: Offset(1, 2),
+      ),
+    ],
+  );
 }
