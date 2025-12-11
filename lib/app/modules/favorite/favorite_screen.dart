@@ -8,7 +8,9 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: [],
+          children: [
+                        Text("Halaman Favorite")
+          ],
         ),
       ),
     );

@@ -8,7 +8,9 @@ class ProvKotaScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: [],
+          children: [
+            Text("Halaman Prov Kota")
+          ],
         ),
       ),
     );
