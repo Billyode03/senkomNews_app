@@ -9,7 +9,11 @@ class FavoriteScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-                        Text("Halaman Favorite")
+            Center(
+              child: Text(
+                "Halaman Favorite",
+              ),
+            ),
           ],
         ),
       ),
