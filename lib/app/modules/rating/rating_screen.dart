@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:senkom_news_app/app/constant/color_constant.dart';
 import 'package:senkom_news_app/app/constant/text_constant.dart';
 import 'package:senkom_news_app/app/global_widget/globalButtonWidget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RatingScreen extends StatefulWidget {
   const RatingScreen({super.key});
@@ -11,6 +12,7 @@ class RatingScreen extends StatefulWidget {
 }
 
 class _AppRatingScreenState extends State<RatingScreen> {
+  double userRating = 0.0;
   void showRatingDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -69,8 +71,23 @@ class _AppRatingScreenState extends State<RatingScreen> {
                 ),
               ),
               const SizedBox(height: 290),
+              // GlobalButtonWidget(
+              //   onTap: () => showRatingDialog(context),
+              //   spacing: 10,
+              //   text: 'Beri Nilai',
+              //   textColor: ColorConstant.white,
+              // ),
               GlobalButtonWidget(
-                onTap: () => showRatingDialog(context),
+                onTap: () async {
+                  final Uri playStoreUrl = Uri.parse(
+                    'https://play.google.com/store/apps/details?id=com.supercell.clashofclans',
+                  );
+                  if (!await launchUrl(playStoreUrl,
+                      mode: LaunchMode.externalApplication)) {}
+                  {
+                    debugPrint('Tidak bisa membuka URL Play Store');
+                  }
+                },
                 spacing: 10,
                 text: 'Beri Nilai',
                 textColor: ColorConstant.white,

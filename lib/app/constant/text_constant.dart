@@ -29,11 +29,11 @@ class TextStyleUsable {
     ],
   );
 
-  static TextStyle title_two = GoogleFonts.poppins(
-    fontSize: 10,
+  static TextStyle title_two = GoogleFonts.roboto(
+    fontSize: 15,
     color: ColorConstant.black,
-    letterSpacing: 3,
-    fontWeight: FontWeight.bold,
+    letterSpacing: 5,
+    fontWeight: FontWeight.normal,
     shadows: [
       Shadow(
         offset: Offset(1, 2),
