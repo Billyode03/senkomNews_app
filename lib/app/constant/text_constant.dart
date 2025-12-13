@@ -34,10 +34,5 @@ class TextStyleUsable {
     color: ColorConstant.black,
     letterSpacing: 5,
     fontWeight: FontWeight.normal,
-    shadows: [
-      Shadow(
-        offset: Offset(1, 2),
-      ),
-    ],
   );
 }

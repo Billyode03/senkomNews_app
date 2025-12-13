@@ -8,6 +8,7 @@ class ProvKotaScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
               child: Text("Halaman Prov Kota"),
@@ -28,7 +29,7 @@ class ProvKotaScreen extends StatelessWidget {
                   )
                 ],
               ),
-            ), 
+            ),
           ],
         ),
       ),

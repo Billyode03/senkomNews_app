@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senkom_news_app/app/constant/color_constant.dart';
+import 'package:senkom_news_app/app/constant/image_constant.dart';
 import 'package:senkom_news_app/app/constant/text_constant.dart';
 import 'package:senkom_news_app/app/global_widget/globalButtonWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -53,7 +54,7 @@ class _AppRatingScreenState extends State<RatingScreen> {
           child: Column(
             children: [
               const SizedBox(height: 30),
-              Center(child: Icon(Icons.star)),
+              Center(child: Image.asset(ImageConstant.ratingImg)),
               const SizedBox(height: 20),
               Center(
                 child: Text(
